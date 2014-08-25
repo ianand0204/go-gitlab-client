@@ -57,7 +57,7 @@ func (g *Gitlab) ResourceUrl(url string, params map[string]string) string {
 		}
 	}
 
-	url = g.BaseUrl + g.ApiPath + url + "?private_token=" + g.Token
+	url = g.BaseUrl + g.ApiPath + url + "?private_token=" + g.Token + "?per_page=100"
 	return url
 }
 
