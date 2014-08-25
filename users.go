@@ -115,6 +115,13 @@ Parameters:
 
 */
 
+func NewUser() *User {
+  return &User{
+    Admin: false,
+    CreateGroup: true,
+  }
+}
+
 func (g *Gitlab) AddUser(u User)  error {
 	path := g.ResourceUrl(users_url, nil)
 
