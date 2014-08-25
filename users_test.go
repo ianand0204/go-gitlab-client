@@ -32,6 +32,8 @@ func TestUser(t *testing.T) {
 	assert.Equal(t, user.CreatedAt, "2001-01-01T00:00:00Z")
 	assert.Equal(t, user.ExternUid, "uid=plouc")
 	assert.Equal(t, user.Provider, "ldap")
+  assert.Equal(t, user.IsAdmin, false)
+  assert.Equal(t, user.CanCreateGroup, false)
 	defer ts.Close()
 }
 
@@ -51,3 +53,4 @@ func TestCurrentUser(t *testing.T) {
 	assert.Equal(t, user.Username, "john_smith")
 	defer ts.Close()
 }
+

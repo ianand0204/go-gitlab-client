@@ -64,7 +64,7 @@ func (g *Gitlab) ResourceUrl(url string, params map[string]string) string {
 func (g *Gitlab) buildAndExecRequest(method, url string, body []byte) ([]byte, error) {
 
 	var req *http.Request
-	var err error
+  var err error
 
 	if body != nil {
 		reader := bytes.NewReader(body)
@@ -144,5 +144,7 @@ func (g *Gitlab) buildAndExecRequestRaw(method, url, opaque string, body []byte)
 		err = fmt.Errorf("*Gitlab.buildAndExecRequestRaw failed: <%d> %s", resp.StatusCode, req.URL)
 	}
 
+  fmt.Println(contents)
 	return contents, err
 }
+
