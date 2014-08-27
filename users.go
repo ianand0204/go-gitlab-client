@@ -134,6 +134,7 @@ func (g *Gitlab) AddUser(u User)  error {
     fmt.Printf("There was an error\n\n%s\n\n", err)
   	return err
   }
+  fmt.Printf("Usage %s was created successfully", u.Username)
   return nil
 }
 
