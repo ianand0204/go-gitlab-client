@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
   "strconv"
-  "log"
+//  "log"
 )
 
 const (
@@ -128,10 +128,10 @@ func (g *Gitlab) AddUser(u User)  error {
   v.Set("can_create_group", strconv.FormatBool(u.CreateGroup))
 	body := v.Encode()
 
-  log.Printf("Request body: %s", body)
+//  log.Printf("Request body: %s", body)
 	_, err = g.buildAndExecRequest("POST", path, []byte(body))
   if err != nil {
-    fmt.Printf("There was an error\n\n %s", err)
+    fmt.Printf("There was an error\n\n%s\n\n", err)
   	return err
   }
   return nil

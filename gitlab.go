@@ -57,7 +57,7 @@ func (g *Gitlab) ResourceUrl(url string, params map[string]string) string {
 		}
 	}
 
-	url = g.BaseUrl + g.ApiPath + url + "?private_token=" + g.Token + "?per_page=100"
+	url = g.BaseUrl + g.ApiPath + url //+ "?private_token=" + g.Token + "?per_page=100"
 	return url
 }
 
@@ -67,14 +67,16 @@ func (g *Gitlab) buildAndExecRequest(method, url string, body []byte) ([]byte, e
   var err error
 
   if method == "GET" {
-    url += "?per_page=100"
+    url = url + "?per_page=100"
   }
 
 	if body != nil {
 		reader := bytes.NewReader(body)
 		req, err = http.NewRequest(method, url, reader)
+    req.Header.Add("PRIVATE-TOKEN", g.Token)
 	} else {
 		req, err = http.NewRequest(method, url, nil)
+    req.Header.Add("PRIVATE-TOKEN", g.Token)
 	}
 	if err != nil {
 		panic("Error while building gitlab request")
@@ -106,7 +108,7 @@ func (g *Gitlab) ResourceUrlRaw(u string, params map[string]string) (string, str
 	}
 
 	path := u
-	u = g.BaseUrl + g.ApiPath + path + "?private_token=" + g.Token
+	u = g.BaseUrl + g.ApiPath + path //+ "?private_token=" + g.Token
 	p, err := url.Parse(u)
 	if err != nil {
 		return u, ""
@@ -123,8 +125,10 @@ func (g *Gitlab) buildAndExecRequestRaw(method, url, opaque string, body []byte)
 	if body != nil {
 		reader := bytes.NewReader(body)
 		req, err = http.NewRequest(method, url, reader)
+    req.Header.Add("PRIVATE-TOKEN", g.Token)
 	} else {
 		req, err = http.NewRequest(method, url, nil)
+    req.Header.Add("PRIVATE-TOKEN", g.Token)
 	}
 	if err != nil {
 		panic("Error while building gitlab request")
