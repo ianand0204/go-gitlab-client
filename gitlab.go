@@ -66,6 +66,10 @@ func (g *Gitlab) buildAndExecRequest(method, url string, body []byte) ([]byte, e
 	var req *http.Request
   var err error
 
+  if method == "GET" {
+    url += "?per_page=100"
+  }
+
 	if body != nil {
 		reader := bytes.NewReader(body)
 		req, err = http.NewRequest(method, url, reader)
